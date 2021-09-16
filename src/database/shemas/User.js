@@ -2,8 +2,13 @@ require('dotenv').config()
 const mongoose = require('../index')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const uuid = require('uuid')
 
 const UserSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    require: true,
+  },
   nome: {
     type: String,
     require: true,
@@ -49,6 +54,7 @@ const UserSchema = new mongoose.Schema({
 })
 
 UserSchema.pre('save', async function (next) {
+  this._id = uuid.v4()
   const hash = await bcrypt.hash(this.senha, 10)
   this.senha = hash
   this.token = jwt.sign({}, process.env.JWT_KEY, {
