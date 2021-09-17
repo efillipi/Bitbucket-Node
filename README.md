@@ -23,6 +23,10 @@
     // Banco de Dados
     $ MongoDB
     $ docker run --name mongodb-sem-senha -p 27017:27017 -d -t mongo
+
+    // Docker compose
+    $ docker-compose up
+    $ Aplicação + banco
 ```
 ---
 
